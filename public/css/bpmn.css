@@ -1,0 +1,138 @@
+html,
+body,
+#canvas {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    position: relative;
+}
+
+body {
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    opacity: 0.3;
+    z-index: 998;
+}
+
+.watermark::before {
+    top: 0;
+    left: 0;
+}
+
+#js-canvas {
+    overflow-x: auto;
+    overflow-y: auto;
+    position: relative;
+    /* transform: rotate(90deg);
+    transform-origin: bottom left;
+    position: absolute;
+    top: -100vw;
+    height: 100vw;
+    width: 100vh; */
+}
+
+#editor {
+    width: 70%;
+    height: 100%;
+    background-color: #000;
+    margin-left: auto;
+    top: 0;
+    position: fixed;
+    right: 0;
+    opacity: 0.9;
+    transform: translateX(100%);
+    transition: transform 0.75s ease-in-out;
+    z-index: 999;
+}
+
+#editor.show {
+    transform: translateX(0);
+}
+
+.editor-text-header {
+    font-size: 1rem;
+    color: #fff;
+    text-align: center;
+}
+
+#main-editor {
+    background-color: #fff;
+    height: 80%;
+}
+
+#close-button {
+    display: none;
+    position: absolute;
+    cursor: pointer;
+    right: 10px;
+    top: 10px;
+}
+
+.highlight:not(.djs-connection) .djs-visual > :nth-child(1) {
+    fill: #c8e5c9 !important; /* color elements as green */
+}
+
+#fullscreen-icon {
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    z-index: 998;
+}
+
+.image-container {
+    background-color: #cbe7cc;
+    display: flex;
+    gap: 20px;
+    padding: 5px;
+    border-radius: 10%;
+}
+
+.in-out {
+    position: absolute;
+    bottom: 0;
+    z-index: 998;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Safari syntax */
+:-webkit-full-screen {
+    background-color: white;
+}
+
+/* IE11 */
+:-ms-fullscreen {
+    background-color: white;
+}
+
+/* Standard syntax */
+:fullscreen {
+    background-color: white;
+}
+
+/* @media only screen and (max-width: 600px) {
+    #js-canvas {
+        transform: rotate(90deg);
+        transform-origin: bottom left;
+        position: absolute;
+        top: -100vw;
+        height: 100vw;
+        width: 100vh;
+    }
+} */
+
+/* Bỏ phần text bpmn.io */
+.bjs-powered-by {
+    display: none !important;
+}
