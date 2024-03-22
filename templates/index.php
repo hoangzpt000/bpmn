@@ -22,7 +22,6 @@ global $bpmn_uri;
                     <img id="zoomin-icon" src="<?= $bpmn_uri . '/public/img/zoom-in.png' ?>" alt="">
                 </div>
             </div>
-            <img src="<?= $bpmn_uri.'/public/img/watermark.png' ?>" class="watermark" alt="">
         </div>
     </div>
 

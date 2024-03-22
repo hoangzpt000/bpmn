@@ -156,6 +156,13 @@ document.addEventListener('DOMContentLoaded', function () {
         canvas.addMarker(nodeID, 'highlight');
     }
 
+    var bjs = document.getElementsByClassName('bjs-container');
+    for (var i = 0; i < bjs.length; i++) {
+        var bjsDiv = document.createElement('div');
+        bjsDiv.classList.add('watermark');
+        bjs[i].appendChild(bjsDiv);
+    }
+
 });
 
 // Đóng dữ liệu của node

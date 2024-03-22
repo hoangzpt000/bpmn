@@ -7,37 +7,48 @@ body,
     position: relative;
 }
 
-body {
-    -webkit-user-select: none;
-    user-select: none;
-}
-
 .watermark {
+    top: 0;
+    height: 200%;
+    width: 300%;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    background-image: url('../img/watermark.png');
+    background-size: auto; 
+    background-repeat: repeat; 
+    rotate: -45deg;
+    opacity: 0.05;
+    animation-name: watermarkanimation;
+    animation-duration: 100s;
+    animation-direction: alternate;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
     pointer-events: none;
-    opacity: 0.3;
-    z-index: 998;
 }
 
-.watermark::before {
-    top: 0;
-    left: 0;
-}
+@keyframes watermarkanimation {
+    0%   {
+      transform: translate(0%, -70%);
+    }
+    25%  {
+      transform: translate(-10%, -70%);
+    }
+    50%  {
+      transform: translate(-20%, -70%);
+    }
+    75% {
+      transform: translate(-30%, -70%);
+    }
+    100% {
+      transform: translate(-40%, -70%);
+    }
+  }
 
 #js-canvas {
-    overflow-x: auto;
-    overflow-y: auto;
+    overflow-x: hidden;
+    overflow-y: hidden;
     position: relative;
-    /* transform: rotate(90deg);
-    transform-origin: bottom left;
-    position: absolute;
-    top: -100vw;
-    height: 100vw;
-    width: 100vh; */
 }
+
 
 #editor {
     width: 70%;
