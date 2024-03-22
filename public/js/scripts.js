@@ -198,6 +198,11 @@ function toggleFullscreen() {
                 bjs[i].style.height = '100vw';
                 bjs[i].style.width = '100vh';
             }
+        } else {
+            for (var i = 0; i < bjs.length; i++) {
+                bjs[i].style.height = '100%';
+                bjs[i].style.width = '100%';
+            }
         }
     }
 }

@@ -9,7 +9,7 @@ body,
 
 .watermark {
     top: 0;
-    height: 200%;
+    height: 300%;
     width: 300%;
     position: absolute;
     background-image: url('../img/watermark.png');
