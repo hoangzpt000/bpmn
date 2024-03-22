@@ -156,6 +156,7 @@ document.addEventListener('DOMContentLoaded', function () {
         canvas.addMarker(nodeID, 'highlight');
     }
 
+    // Add watermark
     var bjs = document.getElementsByClassName('bjs-container');
     for (var i = 0; i < bjs.length; i++) {
         var bjsDiv = document.createElement('div');
@@ -185,17 +186,19 @@ function toggleFullscreen() {
         exitFullscreen(bjs);
     } else {
         requestFullscreen(container);
-        for (var i = 0; i < bjs.length; i++) {
-            // bjs[i].style.height = '100%';
-            // bjs[i].style.width = '100%';
-            bjs[i].style.transform = 'rotate(90deg)';
-            bjs[i].style.transformOrigin = 'bottom left';
-            bjs[i].style.position = 'absolute';
-            bjs[i].style.top = '-100vw';
-            bjs[i].style.height = '100vw';
-            bjs[i].style.width = '100vh';
-        }
 
+        if (window.innerWidth < 768) {
+            for (var i = 0; i < bjs.length; i++) {
+                // bjs[i].style.height = '100%';
+                // bjs[i].style.width = '100%';
+                bjs[i].style.transform = 'rotate(90deg)';
+                bjs[i].style.transformOrigin = 'bottom left';
+                bjs[i].style.position = 'absolute';
+                bjs[i].style.top = '-100vw';
+                bjs[i].style.height = '100vw';
+                bjs[i].style.width = '100vh';
+            }
+        }
     }
 }
 
@@ -231,7 +234,6 @@ function exitFullscreen(bjs) {
             bjs[i].style.removeProperty('transform-origin');
             bjs[i].style.removeProperty('top');
         }
-        console.log(bjs);
         document.exitFullscreen();
     } else if (document.mozCancelFullScreen) { // Firefox
         document.mozCancelFullScreen();
