@@ -77,19 +77,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // căn chỉnh kích thước và xử lí zoom
         diagramResize();
-
-        // fix lỗi fullscreen
-        var fullScreen = document.getElementById('fullscreen-icon');
-        var reset = document.getElementById('reset-icon');
-        var count = 0;
-
-        fullScreen.addEventListener('click', function() {
-            setTimeout(function() {
-                console.log('hello');
-                canvas.zoom('fit-viewport');
-                reset.click();
-            }, 100);
-        });
+        
     }
 
     // Call API
@@ -125,6 +113,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var zoomin = document.getElementById('zoomin-icon');
         var zoomout = document.getElementById('zoomout-icon');
         var reset = document.getElementById('reset-icon');
+        var fullScreen = document.getElementById('fullscreen-icon');
         var zoom = fitViewport;
         var step = fitViewport / 7;
 
@@ -133,6 +122,15 @@ document.addEventListener('DOMContentLoaded', function () {
             fitViewport = canvas.zoom();
             updateVariables();
         })
+
+        fullScreen.addEventListener('click', function() {
+            setTimeout(function() {
+                canvas.zoom('fit-viewport');
+                reset.click();
+                fitViewport = canvas.zoom();
+                updateVariables();
+            }, 100);
+        });
 
         zoomin.addEventListener('click', function () {
             if (zoom < fitViewport*1.8) {
