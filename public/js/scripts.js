@@ -77,6 +77,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // căn chỉnh kích thước và xử lí zoom
         diagramResize();
+
+        // fix lỗi fullscreen
+        var fullScreen = document.getElementById('fullscreen-icon');
+        var reset = document.getElementById('reset-icon');
+        var count = 0;
+
+        fullScreen.addEventListener('click', function() {
+            setTimeout(function() {
+                console.log('hello');
+                canvas.zoom('fit-viewport');
+                reset.click();
+            }, 100);
+        });
     }
 
     // Call API
@@ -122,25 +135,22 @@ document.addEventListener('DOMContentLoaded', function () {
         })
 
         zoomin.addEventListener('click', function () {
-            zoom += step;
-            canvas.zoom(zoom);
+            if (zoom < fitViewport*1.8) {
+                zoom += step;
+                canvas.zoom(zoom);
+            }
         })
         zoomout.addEventListener('click', function () {
-            zoom -= step;
-            canvas.zoom(zoom);
+            if (zoom > fitViewport/4) {
+                zoom -= step;
+                canvas.zoom(zoom);
+            }
         })
         reset.addEventListener('click', function () {
             canvas.zoom('fit-viewport');
             zoom = fitViewport;
         })
     }
-
-    document.addEventListener('keydown', function(event) {
-        if (event.key === "Escape" || event.key === "Esc") {
-            event.preventDefault();
-            console.log('Đã nhấn phím Escape');
-        }
-    });
 
     // Show dữ liệu của node
     function showNodeContent() {
@@ -163,6 +173,12 @@ document.addEventListener('DOMContentLoaded', function () {
         bjsDiv.classList.add('watermark');
         bjs[i].appendChild(bjsDiv);
     }
+
+    // fix lỗi editor
+    setTimeout(function() {
+        var editor = document.getElementById('editor');
+        editor.style.opacity = '0.9';
+    }, 750);
 
 });
 

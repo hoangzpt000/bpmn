@@ -41,7 +41,7 @@ body,
     100% {
       transform: translate(-40%, -70%);
     }
-  }
+}
 
 #js-canvas {
     overflow-x: hidden;
@@ -58,7 +58,7 @@ body,
     top: 0;
     position: fixed;
     right: 0;
-    opacity: 0.9;
+    opacity: 0;
     transform: translateX(100%);
     transition: transform 0.75s ease-in-out;
     z-index: 999;
@@ -131,17 +131,6 @@ body,
 :fullscreen {
     background-color: white;
 }
-
-/* @media only screen and (max-width: 600px) {
-    #js-canvas {
-        transform: rotate(90deg);
-        transform-origin: bottom left;
-        position: absolute;
-        top: -100vw;
-        height: 100vw;
-        width: 100vh;
-    }
-} */
 
 /* Bỏ phần text bpmn.io */
 .bjs-powered-by {
