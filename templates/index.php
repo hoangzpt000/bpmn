@@ -2,7 +2,7 @@
 global $bpmn_uri;
 ?>
 
-<div class="container">
+<div class="bpmn_container">
     <div class="canvas">
         <div id="js-canvas">
             <img

@@ -195,7 +195,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     function BPMNFullScreen(check) {
-            var container = document.querySelector('.container');
+            var container = document.querySelector('.bpmn_container');
             var jsCanvas = document.getElementById('js-canvas');
             var bpmnCanvas = document.querySelector('.canvas');
             var bjs = document.querySelector('.bjs-container');
@@ -206,7 +206,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 container.style.left = '0';
                 container.style.height = '100vh';
                 container.style.width = '100vw';
-                container.style.backgroundColor = '#cccccc';
+                container.style.backgroundColor = '#cccccc';  
+                container.style.zIndex = '1000';  
             
                 bpmnCanvas.style.height = '100%'
                 bpmnCanvas.style.width = '100%'
