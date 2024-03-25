@@ -249,18 +249,17 @@ function exitFullscreen(bjs) {
             bjs[i].style.removeProperty('top');
         }
 
-        setTimeout(function() {
-            window.scrollTo(0, 0);
-        }, 100)
+        if (window.innerWidth > 768 ) {
+            setTimeout(function() {
+                window.scrollTo(0, 0);
+            }, 100)
 
-        setTimeout(function() {
-            var bpmnFullScreen = document.getElementById('fullscreen-icon')
-            var position = bpmnFullScreen.getBoundingClientRect();
-            console.log(position);
-            window.scrollTo(0, position.top);
-        }, 200)
-        
-        // window.scrollY(position.top);
+            setTimeout(function() {
+                var bpmnFullScreen = document.getElementById('fullscreen-icon')
+                var position = bpmnFullScreen.getBoundingClientRect();
+                window.scrollTo(0, position.top);
+            }, 200)
+        }
 
         document.exitFullscreen();
     } else if (document.mozCancelFullScreen) { // Firefox

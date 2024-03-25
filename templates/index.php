@@ -13,7 +13,6 @@ global $bpmn_uri;
                 </div>
                 <h3 class="editor-text-header"> THÔNG TIN CỦA NODE </h3>
                 <div id="main-editor"></div>
-                <div id="editor-footer"></div>
             </div>
             <div class="in-out">
                 <div class="image-container">

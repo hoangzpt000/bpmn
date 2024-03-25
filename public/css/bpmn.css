@@ -76,7 +76,11 @@ body,
 
 #main-editor {
     background-color: #fff;
-    height: 80%;
+    height: 89%;
+}
+
+.ql-toolbar {
+    display: none;
 }
 
 #close-button {
