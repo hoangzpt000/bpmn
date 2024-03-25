@@ -69,6 +69,7 @@ body,
 }
 
 .editor-text-header {
+    margin-top: 0.625rem;
     font-size: 1rem;
     color: #fff;
     text-align: center;
