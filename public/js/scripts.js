@@ -117,17 +117,35 @@ document.addEventListener('DOMContentLoaded', function () {
             zoom = fitViewport;
         })
 
-        fullScreen.addEventListener('click', function() {
-            setTimeout(function() {
-                canvas.zoom('fit-viewport');
-            }, 200);
+        // fullScreen.addEventListener('click', function() {
+        //     setTimeout(function() {
+        //         canvas.zoom('fit-viewport');
+        //     }, 200);
 
-            setTimeout(function() {
+        //     setTimeout(function() {
+        //         canvas.zoom('fit-viewport');
+        //         fitViewport = canvas.zoom();
+        //         zoom = fitViewport;
+        //     }, 250);
+        // });
+
+        check = false;
+
+        fullScreen.addEventListener('click', function() {
+            if (check === false) {
+                check = true;
+            } else {
+                check = false;
+            }
+            BPMNFullScreen(check);
+            canvas.zoom('fit-viewport');
+
+            setTimeout(() => {
                 canvas.zoom('fit-viewport');
                 fitViewport = canvas.zoom();
                 zoom = fitViewport;
-            }, 250);
-        });
+            }, 200);
+        })
 
         zoomin.addEventListener('click', function () {
             if (zoom < fitViewport*1.8) {
@@ -174,6 +192,50 @@ document.addEventListener('DOMContentLoaded', function () {
         var editor = document.getElementById('editor');
         editor.style.opacity = '0.9';
     }, 750);
+
+
+    function BPMNFullScreen(check) {
+            var container = document.querySelector('.container');
+            var jsCanvas = document.getElementById('js-canvas');
+            var bpmnCanvas = document.querySelector('.canvas');
+            var bjs = document.querySelector('.bjs-container');
+            
+            if (check === true) {
+                container.style.position = 'fixed';
+                container.style.top = '0';
+                container.style.left = '0';
+                container.style.height = '100vh';
+                container.style.width = '100vw';
+                container.style.backgroundColor = '#cccccc';
+            
+                bpmnCanvas.style.height = '100%'
+                bpmnCanvas.style.width = '100%'
+            
+                jsCanvas.style.height = '100%'
+                jsCanvas.style.width = '100%'
+            
+                if (window.innerWidth < 768) {
+                    bjs.style.transform = 'rotate(90deg)';
+                    bjs.style.transformOrigin = 'bottom left';
+                    bjs.style.position = 'absolute';
+                    bjs.style.top = '-100vw';
+                    bjs.style.height = '100vw';
+                    bjs.style.width = '100vh';
+                } else {
+                    bjs.style.height = '100%'
+                    bjs.style.width = '100%'
+                }
+            } else {
+                container.removeAttribute('style');
+                jsCanvas.style.height = '600px';
+                bjs.style.height = '600px';
+                bjs.style.width = '100%';
+                bjs.style.position = 'relative';
+                bjs.style.removeProperty('transform');
+                bjs.style.removeProperty('transform-origin');
+                bjs.style.removeProperty('top');
+            }
+    }
 
 });
 

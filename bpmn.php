@@ -52,6 +52,7 @@ function enqueue_bpmn_resources()
     wp_enqueue_style('bpmnjs-css', $bpmn_uri . '/public/css/bpmn-js.css');
     wp_enqueue_style('diagramjs-css', $bpmn_uri . '/public/css/diagram-js.css');
     wp_enqueue_style('quill-css', $bpmn_uri . '/public/css/quill.snow.css');
+    wp_enqueue_style('bpmn-fontawesome-css', $bpmn_uri . '/public/css/fontawesome.min.css');
 
     //JS
     // wp_enqueue_script('bpmnjs', $bpmn_uri . '/public/js/bpmn-viewer.development.js');
@@ -59,7 +60,7 @@ function enqueue_bpmn_resources()
     wp_enqueue_script('quill-js', $bpmn_uri . '/public/js/quill.js');
     wp_enqueue_script('bpmn-main-js', $bpmn_uri . '/public/js/scripts.js');
     wp_enqueue_script('GSAP-js', $bpmn_uri . '/public/js/gsap.min.js');
-    wp_enqueue_script('html2canvas-js', $bpmn_uri.'/public/js/html2canvas.min.js');
+    wp_enqueue_script('fontawesome-js', $bpmn_uri.'/public/js/fontawsome.min.js');
 }
 
 

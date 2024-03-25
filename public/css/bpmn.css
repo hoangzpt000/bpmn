@@ -103,14 +103,6 @@ body,
     z-index: 998;
 }
 
-.image-container {
-    background-color: #cbe7cc;
-    display: flex;
-    gap: 20px;
-    padding: 5px;
-    border-radius: 10%;
-}
-
 .in-out {
     position: absolute;
     bottom: 0;
@@ -120,6 +112,47 @@ body,
     justify-content: center;
     align-items: center;
     gap: 20px;
+}
+
+.image-container {
+    background-color: #fff;
+    display: flex;
+    gap: 20px;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+#zoomin-icon {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    transition: color 0.5s ease;
+}
+
+#zoomin-icon:hover {
+    color: #e90064;
+}
+
+#zoomout-icon {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    transition: color 0.5s ease;
+}
+
+#zoomout-icon:hover {
+    color: #e90064;
+}
+
+#reset-icon {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    transition: color 0.5s ease;
+}
+
+#reset-icon:hover {
+    color: #e90064;
 }
 
 /* Safari syntax */
