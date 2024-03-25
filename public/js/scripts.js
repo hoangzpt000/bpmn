@@ -120,13 +120,13 @@ document.addEventListener('DOMContentLoaded', function () {
         fullScreen.addEventListener('click', function() {
             setTimeout(function() {
                 canvas.zoom('fit-viewport');
-            }, 100);
+            }, 200);
 
             setTimeout(function() {
                 canvas.zoom('fit-viewport');
                 fitViewport = canvas.zoom();
                 zoom = fitViewport;
-            }, 150);
+            }, 250);
         });
 
         zoomin.addEventListener('click', function () {
@@ -248,6 +248,20 @@ function exitFullscreen(bjs) {
             bjs[i].style.removeProperty('transform-origin');
             bjs[i].style.removeProperty('top');
         }
+
+        setTimeout(function() {
+            window.scrollTo(0, 0);
+        }, 100)
+
+        setTimeout(function() {
+            var bpmnFullScreen = document.getElementById('fullscreen-icon')
+            var position = bpmnFullScreen.getBoundingClientRect();
+            console.log(position);
+            window.scrollTo(0, position.top);
+        }, 200)
+        
+        // window.scrollY(position.top);
+
         document.exitFullscreen();
     } else if (document.mozCancelFullScreen) { // Firefox
         document.mozCancelFullScreen();
