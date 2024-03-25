@@ -105,42 +105,39 @@ document.addEventListener('DOMContentLoaded', function () {
         canvas.zoom('fit-viewport');
         var fitViewport = canvas.zoom();
 
-        function updateVariables() {
-            zoom = fitViewport;
-            step = fitViewport / 7;
-        }
-
         var zoomin = document.getElementById('zoomin-icon');
         var zoomout = document.getElementById('zoomout-icon');
         var reset = document.getElementById('reset-icon');
         var fullScreen = document.getElementById('fullscreen-icon');
         var zoom = fitViewport;
-        var step = fitViewport / 7;
 
         window.addEventListener('resize', function () {
             canvas.zoom('fit-viewport');
             fitViewport = canvas.zoom();
-            updateVariables();
+            zoom = fitViewport;
         })
 
         fullScreen.addEventListener('click', function() {
             setTimeout(function() {
                 canvas.zoom('fit-viewport');
-                reset.click();
-                fitViewport = canvas.zoom();
-                updateVariables();
             }, 100);
+
+            setTimeout(function() {
+                canvas.zoom('fit-viewport');
+                fitViewport = canvas.zoom();
+                zoom = fitViewport;
+            }, 150);
         });
 
         zoomin.addEventListener('click', function () {
             if (zoom < fitViewport*1.8) {
-                zoom += step;
+                zoom += fitViewport/7;
                 canvas.zoom(zoom);
             }
         })
         zoomout.addEventListener('click', function () {
             if (zoom > fitViewport/4) {
-                zoom -= step;
+                zoom -= fitViewport/7;
                 canvas.zoom(zoom);
             }
         })
@@ -203,8 +200,6 @@ function toggleFullscreen() {
 
         if (window.innerWidth < 768) {
             for (var i = 0; i < bjs.length; i++) {
-                // bjs[i].style.height = '100%';
-                // bjs[i].style.width = '100%';
                 bjs[i].style.transform = 'rotate(90deg)';
                 bjs[i].style.transformOrigin = 'bottom left';
                 bjs[i].style.position = 'absolute';
