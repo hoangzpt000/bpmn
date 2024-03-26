@@ -199,6 +199,7 @@ document.addEventListener('DOMContentLoaded', function () {
             var jsCanvas = document.getElementById('js-canvas');
             var bpmnCanvas = document.querySelector('.canvas');
             var bjs = document.querySelector('.bjs-container');
+            var editor = document.getElementById('editor');
             
             if (check === true) {
                 container.style.position = 'fixed';
@@ -222,6 +223,17 @@ document.addEventListener('DOMContentLoaded', function () {
                     bjs.style.top = '-100vw';
                     bjs.style.height = '100vw';
                     bjs.style.width = '100vh';
+
+                    editor.style.width = '100vw';
+                    editor.style.height = '100vw';
+                    editor.style.rotate = '90deg';
+                    editor.style.transform = 'translateX(-100%)';
+                    editor.style.opacity = '0';
+
+                    setTimeout(function() {
+                        editor.style.opacity = '0.9';
+                    }, 750);
+                
                 } else {
                     bjs.style.height = '100%'
                     bjs.style.width = '100%'

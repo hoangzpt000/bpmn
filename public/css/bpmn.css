@@ -65,7 +65,7 @@ body,
 }
 
 #editor.show {
-    transform: translateX(0);
+    transform: translateX(0) !important;
 }
 
 .editor-text-header {
