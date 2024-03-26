@@ -200,6 +200,7 @@ document.addEventListener('DOMContentLoaded', function () {
             var bpmnCanvas = document.querySelector('.canvas');
             var bjs = document.querySelector('.bjs-container');
             var editor = document.getElementById('editor');
+            var bpmnFullScreen = document.getElementById('fullscreen-icon');
             
             if (check === true) {
                 container.style.position = 'fixed';
@@ -247,6 +248,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 bjs.style.removeProperty('transform');
                 bjs.style.removeProperty('transform-origin');
                 bjs.style.removeProperty('top');
+
+                editor.style.width = '70%';
+                editor.style.height = '100%';
+                editor.style.removeProperty('rotate');
+                editor.style.transform = 'translateX(100%)';
+                editor.style.opacity = '0';
+
+                setTimeout(function() {
+                    editor.style.opacity = '0.9';
+                }, 750);
             }
     }
 
