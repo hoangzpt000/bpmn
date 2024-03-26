@@ -258,10 +258,8 @@ function closeNodeContent() {
     var closeIcon = document.getElementById('close-icon');
     var closeButton = document.getElementById('close-button');
 
-    closeIcon.addEventListener('click', function () {
-        closeButton.style.display = 'none';
-        editor.classList.remove('show');
-    });
+    closeButton.style.display = 'none';
+    editor.classList.remove('show');
 }
 
 
