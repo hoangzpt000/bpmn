@@ -110,11 +110,13 @@ document.addEventListener('DOMContentLoaded', function () {
         var reset = document.getElementById('reset-icon');
         var fullScreen = document.getElementById('fullscreen-icon');
         var zoom = fitViewport;
+        resizeDiagram();
 
         window.addEventListener('resize', function () {
             canvas.zoom('fit-viewport');
             fitViewport = canvas.zoom();
             zoom = fitViewport;
+            resizeDiagram();
         })
 
         // fullScreen.addEventListener('click', function() {
@@ -144,6 +146,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 canvas.zoom('fit-viewport');
                 fitViewport = canvas.zoom();
                 zoom = fitViewport;
+                if (check === false) {
+                    resizeDiagram();
+                }
             }, 200);
         })
 
@@ -259,6 +264,13 @@ document.addEventListener('DOMContentLoaded', function () {
                     editor.style.opacity = '0.9';
                 }, 750);
             }
+    }
+
+    function resizeDiagram() {
+        var viewPort = document.querySelector('.viewport');
+        var jsCanvas = document.getElementById('js-canvas');
+        var bpmnHeight = viewPort.getBoundingClientRect().height;
+        jsCanvas.style.height = bpmnHeight + 'px';
     }
 
 });
