@@ -236,6 +236,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     editor.style.transform = 'translateX(-100%)';
                     editor.style.opacity = '0';
 
+                    bpmnFullScreen.style.bottom = 0;
+                    bpmnFullScreen.style.right = 0;
+
                     setTimeout(function() {
                         editor.style.opacity = '0.9';
                     }, 750);
@@ -259,6 +262,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 editor.style.removeProperty('rotate');
                 editor.style.transform = 'translateX(100%)';
                 editor.style.opacity = '0';
+
+                bpmnFullScreen.style.removeProperty('bottom');
+                bpmnFullScreen.style.right = '20px';
 
                 setTimeout(function() {
                     editor.style.opacity = '0.9';
