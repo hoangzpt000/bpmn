@@ -16,7 +16,7 @@ body,
     background-size: auto; 
     background-repeat: repeat; 
     rotate: -45deg;
-    opacity: 0.05;
+    opacity: 0.03;
     animation-name: watermarkanimation;
     animation-duration: 100s;
     animation-direction: alternate;
