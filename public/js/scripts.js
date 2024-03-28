@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // load bpmnviewer
     var viewer = new BpmnJS({
         container: '#js-canvas',
-        height: 600
+        height: 600,
     });
 
     var canvas = viewer.get('canvas');
@@ -110,13 +110,13 @@ document.addEventListener('DOMContentLoaded', function () {
         var reset = document.getElementById('reset-icon');
         var fullScreen = document.getElementById('fullscreen-icon');
         var zoom = fitViewport;
-        resizeDiagram();
+        fitDiagram();
 
         window.addEventListener('resize', function () {
             canvas.zoom('fit-viewport');
             fitViewport = canvas.zoom();
             zoom = fitViewport;
-            resizeDiagram();
+            fitDiagram();
         })
 
         // fullScreen.addEventListener('click', function() {
@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 fitViewport = canvas.zoom();
                 zoom = fitViewport;
                 if (check === false) {
-                    resizeDiagram();
+                    fitDiagram();
                 }
             }, 200);
         })
@@ -272,13 +272,12 @@ document.addEventListener('DOMContentLoaded', function () {
             }
     }
 
-    function resizeDiagram() {
+    function fitDiagram() {
         var viewPort = document.querySelector('.viewport');
         var jsCanvas = document.getElementById('js-canvas');
         var bpmnHeight = viewPort.getBoundingClientRect().height;
-        jsCanvas.style.height = bpmnHeight + 'px';
+        jsCanvas.style.height = (bpmnHeight + 30) + 'px';
     }
-
 });
 
 // Đóng dữ liệu của node
