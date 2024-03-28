@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var BPMNFileName = apiData.thongTinChung.bpmnFileName;
         var nodeList = apiData.thuTucThucHien;
 
-        fetch(`https://apis.trolyphapluat.ai/${BPMNFileName}`)
+        fetch(`https://api.trolyphapluat.ai/${BPMNFileName}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
