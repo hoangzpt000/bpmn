@@ -51,11 +51,15 @@ document.addEventListener('DOMContentLoaded', function () {
         await viewer.importXML(XMLContent)
             .then(async function () {
 
+                var bpmnLoading = document.getElementById('bpmn-loading-container');
+                bpmnLoading.style.display = 'none';
+
                 nodeList.forEach((node) => {
                     addMarkerForNode(node.nodeID);
                 })
 
                 viewer.on('element.click', function (event) {
+                    var textNodeName = document.getElementById('editor-text-nodename');
 
                     var nodeId = event.element.id;
                     var nodeName = event.element.businessObject.name;
@@ -63,6 +67,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     nodeList.forEach(node => {
                         if (nodeId === node.nodeID) {
                             quill.clipboard.dangerouslyPasteHTML(node.nodeContent);
+                            textNodeName.innerHTML = nodeName;
                             showNodeContent();
                         }
                     });
@@ -112,11 +117,16 @@ document.addEventListener('DOMContentLoaded', function () {
         var zoom = fitViewport;
         fitDiagram();
 
+        var checkFullScreen = false;
+
+
         window.addEventListener('resize', function () {
             canvas.zoom('fit-viewport');
             fitViewport = canvas.zoom();
             zoom = fitViewport;
-            fitDiagram();
+            if (checkFullScreen === false) {
+                fitDiagram();
+            }
         })
 
         // fullScreen.addEventListener('click', function() {
@@ -131,22 +141,21 @@ document.addEventListener('DOMContentLoaded', function () {
         //     }, 250);
         // });
 
-        check = false;
 
         fullScreen.addEventListener('click', function() {
-            if (check === false) {
-                check = true;
+            if (checkFullScreen === false) {
+                checkFullScreen = true;
             } else {
-                check = false;
+                checkFullScreen = false;
             }
-            BPMNFullScreen(check);
+            BPMNFullScreen(checkFullScreen);
             canvas.zoom('fit-viewport');
 
             setTimeout(() => {
                 canvas.zoom('fit-viewport');
                 fitViewport = canvas.zoom();
                 zoom = fitViewport;
-                if (check === false) {
+                if (checkFullScreen === false) {
                     fitDiagram();
                 }
             }, 200);
@@ -199,7 +208,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }, 750);
 
 
-    function BPMNFullScreen(check) {
+    function BPMNFullScreen(checkFullScreen) {
             var container = document.querySelector('.bpmn_container');
             var jsCanvas = document.getElementById('js-canvas');
             var bpmnCanvas = document.querySelector('.canvas');
@@ -207,7 +216,7 @@ document.addEventListener('DOMContentLoaded', function () {
             var editor = document.getElementById('editor');
             var bpmnFullScreen = document.getElementById('fullscreen-icon');
             
-            if (check === true) {
+            if (checkFullScreen === true) {
                 container.style.position = 'fixed';
                 container.style.top = '0';
                 container.style.left = '0';

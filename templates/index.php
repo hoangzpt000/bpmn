@@ -15,11 +15,15 @@ global $bpmn_uri;
             </div>
         </div>
     </div>
+    <div id="bpmn-loading-container">
+        <div class="loading"></div>
+    </div>
 </div>
 <div id="editor">
     <div id="close-button">
         <img onclick="closeNodeContent()" id="close-icon" src="<?= $bpmn_uri . '/public/img/cancel.png' ?>">
     </div>
-    <h3 class="editor-text-header"> THÔNG TIN CỦA NODE </h3>
+    <h3 class="editor-text-header"> THÔNG TIN CỦA BƯỚC: </h3>
+    <p id="editor-text-nodename">  </p>
     <div id="main-editor"></div>
 </div>
