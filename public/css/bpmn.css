@@ -9,6 +9,7 @@ body,
 
 .bpmn_container {
     position: relative;
+    min-height: 100px;
 }
 
 .watermark {
