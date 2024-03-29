@@ -16,6 +16,10 @@ document.addEventListener('DOMContentLoaded', function () {
     // Lấy id sơ đồ từ session
     var diagramId = JSON.parse(sessionStorage.getItem('diagramId'));
 
+    var bpmnFullScreen = document.getElementById('fullscreen-icon');
+    var checkFullScreen = false;
+
+
     getBPMNFile();
 
 
@@ -117,9 +121,6 @@ document.addEventListener('DOMContentLoaded', function () {
         var zoom = fitViewport;
         fitDiagram();
 
-        var checkFullScreen = false;
-
-
         window.addEventListener('resize', function () {
             canvas.zoom('fit-viewport');
             fitViewport = canvas.zoom();
@@ -214,9 +215,10 @@ document.addEventListener('DOMContentLoaded', function () {
             var bpmnCanvas = document.querySelector('.canvas');
             var bjs = document.querySelector('.bjs-container');
             var editor = document.getElementById('editor');
-            var bpmnFullScreen = document.getElementById('fullscreen-icon');
+            // var bpmnFullScreen = document.getElementById('fullscreen-icon');
             
             if (checkFullScreen === true) {
+
                 container.style.position = 'fixed';
                 container.style.top = '0';
                 container.style.left = '0';
@@ -287,6 +289,15 @@ document.addEventListener('DOMContentLoaded', function () {
         var bpmnHeight = viewPort.getBoundingClientRect().height;
         jsCanvas.style.height = (bpmnHeight + 30) + 'px';
     }
+
+    // Esc close fullscreen
+    document.addEventListener("keydown", function(event) {
+        if (event.key === "Escape") {
+            if (checkFullScreen === true) {
+                bpmnFullScreen.click();
+            }
+        }
+    });
 });
 
 // Đóng dữ liệu của node
