@@ -16,8 +16,18 @@ document.addEventListener('DOMContentLoaded', function () {
     // Lấy id sơ đồ từ session
     var diagramId = JSON.parse(sessionStorage.getItem('diagramId'));
 
+    // All variable
     var bpmnFullScreen = document.getElementById('fullscreen-icon');
     var checkFullScreen = false;
+    var viewPort = document.querySelector('.viewport');
+    var jsCanvas = document.getElementById('js-canvas');
+    var bjs = document.querySelector('.bjs-container');
+
+    var container = document.querySelector('.bpmn_container');
+    var bpmnCanvas = document.querySelector('.canvas');
+    var editor = document.getElementById('editor');    
+    
+    var closeButton = document.getElementById('close-button');
 
 
     getBPMNFile();
@@ -182,8 +192,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Show dữ liệu của node
     function showNodeContent() {
-        var editor = document.getElementById('editor');
-        var closeButton = document.getElementById('close-button');
         closeButton.style.display = 'block'
         editor.classList.add('show');
     }
@@ -204,90 +212,85 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // fix lỗi editor
     setTimeout(function() {
-        var editor = document.getElementById('editor');
         editor.style.opacity = '0.9';
     }, 750);
 
 
     function BPMNFullScreen(checkFullScreen) {
-            var container = document.querySelector('.bpmn_container');
-            var jsCanvas = document.getElementById('js-canvas');
-            var bpmnCanvas = document.querySelector('.canvas');
-            var bjs = document.querySelector('.bjs-container');
-            var editor = document.getElementById('editor');
-            // var bpmnFullScreen = document.getElementById('fullscreen-icon');
-            
-            if (checkFullScreen === true) {
+        var bjs = document.querySelector('.bjs-container');
 
-                container.style.position = 'fixed';
-                container.style.top = '0';
-                container.style.left = '0';
-                container.style.height = '100vh';
-                container.style.width = '100vw';
-                container.style.backgroundColor = '#cccccc';  
-                container.style.zIndex = '1000';  
-            
-                bpmnCanvas.style.height = '100%'
-                bpmnCanvas.style.width = '100%'
-            
-                jsCanvas.style.height = '100%'
-                jsCanvas.style.width = '100%'
-            
-                if (window.innerWidth < 768) {
-                    bjs.style.transform = 'rotate(90deg)';
-                    bjs.style.transformOrigin = 'bottom left';
-                    bjs.style.position = 'absolute';
-                    bjs.style.top = '-100vw';
-                    bjs.style.height = '100vw';
-                    bjs.style.width = '100vh';
+        if (checkFullScreen === true) {
 
-                    editor.style.width = '100vw';
-                    editor.style.height = '100vw';
-                    editor.style.rotate = '90deg';
-                    editor.style.transform = 'translateX(-100%)';
-                    editor.style.opacity = '0';
+            container.style.position = 'fixed';
+            container.style.top = '0';
+            container.style.left = '0';
+            container.style.height = '100vh';
+            container.style.width = '100vw';
+            container.style.backgroundColor = '#cccccc';  
+            container.style.zIndex = '1000';  
+        
+            bpmnCanvas.style.height = '100%'
+            bpmnCanvas.style.width = '100%'
+        
+            jsCanvas.style.height = '100%'
+            jsCanvas.style.width = '100%'
+        
+            if (window.innerWidth < 768) {
+                bjs.style.transform = 'rotate(90deg)';
+                bjs.style.transformOrigin = 'bottom left';
+                bjs.style.position = 'absolute';
+                bjs.style.top = '-100vw';
+                bjs.style.height = '100vw';
+                bjs.style.width = '100vh';
 
-                    bpmnFullScreen.style.bottom = 0;
-                    bpmnFullScreen.style.right = 0;
-
-                    setTimeout(function() {
-                        editor.style.opacity = '0.9';
-                    }, 750);
-                
-                } else {
-                    bjs.style.height = '100%'
-                    bjs.style.width = '100%'
-                }
-            } else {
-                container.removeAttribute('style');
-                jsCanvas.style.height = '600px';
-                bjs.style.height = '600px';
-                bjs.style.width = '100%';
-                bjs.style.position = 'relative';
-                bjs.style.removeProperty('transform');
-                bjs.style.removeProperty('transform-origin');
-                bjs.style.removeProperty('top');
-
-                editor.style.width = '70%';
-                editor.style.height = '100%';
-                editor.style.removeProperty('rotate');
-                editor.style.transform = 'translateX(100%)';
+                editor.style.width = '100vw';
+                editor.style.height = '100vw';
+                editor.style.rotate = '90deg';
+                editor.style.transform = 'translateX(-100%)';
                 editor.style.opacity = '0';
 
-                bpmnFullScreen.style.removeProperty('bottom');
-                bpmnFullScreen.style.right = '20px';
+                bpmnFullScreen.style.bottom = 0;
+                bpmnFullScreen.style.right = 0;
 
                 setTimeout(function() {
                     editor.style.opacity = '0.9';
                 }, 750);
+            
+            } else {
+                bjs.style.height = '100%'
+                bjs.style.width = '100%'
             }
+        } else {
+            container.removeAttribute('style');
+            jsCanvas.style.height = '600px';
+            bjs.style.height = '600px';
+            bjs.style.width = '100%';
+            bjs.style.position = 'relative';
+            bjs.style.removeProperty('transform');
+            bjs.style.removeProperty('transform-origin');
+            bjs.style.removeProperty('top');
+
+            editor.style.width = '70%';
+            editor.style.height = '100%';
+            editor.style.removeProperty('rotate');
+            editor.style.transform = 'translateX(100%)';
+            editor.style.opacity = '0';
+
+            bpmnFullScreen.style.removeProperty('bottom');
+            bpmnFullScreen.style.right = '20px';
+
+            setTimeout(function() {
+                editor.style.opacity = '0.9';
+            }, 750);
+        }
     }
 
     function fitDiagram() {
-        var viewPort = document.querySelector('.viewport');
-        var jsCanvas = document.getElementById('js-canvas');
+        var bjs = document.querySelector('.bjs-container');
         var bpmnHeight = viewPort.getBoundingClientRect().height;
+        
         jsCanvas.style.height = (bpmnHeight + 30) + 'px';
+        bjs.style.height = '100%';
     }
 
     // Esc close fullscreen
@@ -298,6 +301,14 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     });
+
+    window.addEventListener("orientationchange", (event) => {
+        event.preventDefault();
+        canvas.zoom("fit-viewport");
+        setTimeout(() => {
+            canvas.zoom('fit-viewport');
+        }, 200)
+    })
 });
 
 // Đóng dữ liệu của node
