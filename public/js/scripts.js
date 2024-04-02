@@ -26,6 +26,9 @@ document.addEventListener('DOMContentLoaded', function () {
     var container = document.querySelector('.bpmn_container');
     var bpmnCanvas = document.querySelector('.canvas');
     var editor = document.getElementById('editor');    
+
+    var fitViewport;
+    var zoom;
     
 
     getBPMNFile();
@@ -120,13 +123,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function diagramResize() {
         canvas.zoom('fit-viewport');
-        var fitViewport = canvas.zoom();
+        fitViewport = canvas.zoom();
 
         var zoomin = document.getElementById('zoomin-icon');
         var zoomout = document.getElementById('zoomout-icon');
         var reset = document.getElementById('reset-icon');
         var fullScreen = document.getElementById('fullscreen-icon');
-        var zoom = fitViewport;
+        zoom = fitViewport;
         fitDiagram();
 
         window.addEventListener('resize', function () {
@@ -175,16 +178,19 @@ document.addEventListener('DOMContentLoaded', function () {
                 zoom += fitViewport/7;
                 canvas.zoom(zoom);
             }
+            console.log("zoomin: ", zoom);
         })
         zoomout.addEventListener('click', function () {
             if (zoom > fitViewport/4) {
                 zoom -= fitViewport/7;
                 canvas.zoom(zoom);
             }
+            console.log("zoomout: ",zoom);
         })
         reset.addEventListener('click', function () {
             canvas.zoom('fit-viewport');
             zoom = fitViewport;
+            console.log("rs: ", zoom);
         })
     }
 
@@ -285,6 +291,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    // Điều chỉnh chiều dài khoảng vẽ đồ thị
     function fitDiagram() {
         var bjs = document.querySelector('.bjs-container');
         var bpmnHeight = viewPort.getBoundingClientRect().height;
@@ -302,12 +309,34 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    // Xử lí xoay màn hình
     window.addEventListener("orientationchange", (event) => {
-        event.preventDefault();
-        canvas.zoom("fit-viewport");
-        setTimeout(() => {
-            canvas.zoom('fit-viewport');
-        }, 200)
+        var bjs = document.querySelector('.bjs-container');
+
+        if (checkFullScreen === true) {
+            bjs.style.removeProperty("transform");
+            bjs.style.removeProperty("transform-origin");
+            bjs.style.removeProperty("top");
+            bjs.style.height = '100%';
+            bjs.style.width = '100%';
+
+            editor.style.removeProperty("rotate");
+            editor.style.transform = 'translateX(100%)';
+            editor.style.width = '70%';
+            editor.style.height = '100%';
+            editor.style.opacity = '0';
+
+            setTimeout(function() {
+                editor.style.opacity = '0.9';
+            }, 750);
+
+            setTimeout(() => {
+                canvas.zoom("fit-viewport");
+                fitViewport = canvas.zoom();
+                zoom = fitViewport;
+                console.log(fitViewport);
+            }, 100);
+        }
     })
 });
 
