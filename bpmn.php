@@ -60,7 +60,7 @@ function enqueue_bpmn_resources()
     wp_enqueue_script('quill-js', $bpmn_uri . '/public/js/quill.js');
     wp_enqueue_script('bpmn-main-js', $bpmn_uri . '/public/js/scripts.js');
     wp_enqueue_script('GSAP-js', $bpmn_uri . '/public/js/gsap.min.js');
-    wp_enqueue_script('fontawesome-js', $bpmn_uri.'/public/js/fontawsome.min.js');
+    // wp_enqueue_script('fontawesome-js', $bpmn_uri.'/public/js/fontawsome.min.js');
 }
 
 

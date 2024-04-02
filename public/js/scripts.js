@@ -27,8 +27,6 @@ document.addEventListener('DOMContentLoaded', function () {
     var bpmnCanvas = document.querySelector('.canvas');
     var editor = document.getElementById('editor');    
     
-    var closeButton = document.getElementById('close-button');
-
 
     getBPMNFile();
 
@@ -192,6 +190,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Show dữ liệu của node
     function showNodeContent() {
+        var closeButton = document.getElementById('close-button');
+
         closeButton.style.display = 'block'
         editor.classList.add('show');
     }
