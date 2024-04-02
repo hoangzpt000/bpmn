@@ -25,17 +25,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var container = document.querySelector('.bpmn_container');
     var bpmnCanvas = document.querySelector('.canvas');
-    var editor = document.getElementById('editor');    
+    var editor = document.getElementById('editor');
 
     var fitViewport;
     var zoom;
-    
 
-    getBPMNFile();
+
+    getDataFromAPI();
 
 
     // Lấy dữ liệu xml của file bpmn
-    async function getBPMNFile() {
+    async function getDataFromAPI() {
 
         var apiData = await callAPI(diagramId);
         var BPMNFileName = apiData.thongTinChung.bpmnFileName;
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // căn chỉnh kích thước và xử lí zoom
         diagramResize();
-        
+
     }
 
     // Call API
@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // });
 
 
-        fullScreen.addEventListener('click', function() {
+        fullScreen.addEventListener('click', function () {
             if (checkFullScreen === false) {
                 checkFullScreen = true;
             } else {
@@ -174,18 +174,18 @@ document.addEventListener('DOMContentLoaded', function () {
         })
 
         zoomin.addEventListener('click', function () {
-            if (zoom < fitViewport*1.8) {
-                zoom += fitViewport/7;
+            if (zoom < fitViewport * 1.8) {
+                zoom += fitViewport / 7;
                 canvas.zoom(zoom);
             }
             console.log("zoomin: ", zoom);
         })
         zoomout.addEventListener('click', function () {
-            if (zoom > fitViewport/4) {
-                zoom -= fitViewport/7;
+            if (zoom > fitViewport / 4) {
+                zoom -= fitViewport / 7;
                 canvas.zoom(zoom);
             }
-            console.log("zoomout: ",zoom);
+            console.log("zoomout: ", zoom);
         })
         reset.addEventListener('click', function () {
             canvas.zoom('fit-viewport');
@@ -217,7 +217,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // fix lỗi editor
-    setTimeout(function() {
+    setTimeout(function () {
         editor.style.opacity = '0.9';
     }, 750);
 
@@ -232,15 +232,15 @@ document.addEventListener('DOMContentLoaded', function () {
             container.style.left = '0';
             container.style.height = '100vh';
             container.style.width = '100vw';
-            container.style.backgroundColor = '#cccccc';  
-            container.style.zIndex = '1000';  
-        
+            container.style.backgroundColor = '#cccccc';
+            container.style.zIndex = '1000';
+
             bpmnCanvas.style.height = '100%'
             bpmnCanvas.style.width = '100%'
-        
+
             jsCanvas.style.height = '100%'
             jsCanvas.style.width = '100%'
-        
+
             if (window.innerWidth < 768) {
                 bjs.style.transform = 'rotate(90deg)';
                 bjs.style.transformOrigin = 'bottom left';
@@ -258,10 +258,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 bpmnFullScreen.style.bottom = 0;
                 bpmnFullScreen.style.right = 0;
 
-                setTimeout(function() {
+                setTimeout(function () {
                     editor.style.opacity = '0.9';
                 }, 750);
-            
+
             } else {
                 bjs.style.height = '100%'
                 bjs.style.width = '100%'
@@ -285,7 +285,7 @@ document.addEventListener('DOMContentLoaded', function () {
             bpmnFullScreen.style.removeProperty('bottom');
             bpmnFullScreen.style.right = '20px';
 
-            setTimeout(function() {
+            setTimeout(function () {
                 editor.style.opacity = '0.9';
             }, 750);
         }
@@ -295,13 +295,13 @@ document.addEventListener('DOMContentLoaded', function () {
     function fitDiagram() {
         var bjs = document.querySelector('.bjs-container');
         var bpmnHeight = viewPort.getBoundingClientRect().height;
-        
+
         jsCanvas.style.height = (bpmnHeight + 30) + 'px';
         bjs.style.height = '100%';
     }
 
     // Esc close fullscreen
-    document.addEventListener("keydown", function(event) {
+    document.addEventListener("keydown", function (event) {
         if (event.key === "Escape") {
             if (checkFullScreen === true) {
                 bpmnFullScreen.click();
@@ -309,33 +309,35 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Xử lí xoay màn hình
+    // Xử lí xoay màn hình khi đang trong chế độ fullscreen
     window.addEventListener("orientationchange", (event) => {
-        var bjs = document.querySelector('.bjs-container');
+        if (window.innerWidth < 768) {
+            var bjs = document.querySelector('.bjs-container');
 
-        if (checkFullScreen === true) {
-            bjs.style.removeProperty("transform");
-            bjs.style.removeProperty("transform-origin");
-            bjs.style.removeProperty("top");
-            bjs.style.height = '100%';
-            bjs.style.width = '100%';
+            if (checkFullScreen === true) {
+                bjs.style.removeProperty("transform");
+                bjs.style.removeProperty("transform-origin");
+                bjs.style.removeProperty("top");
+                bjs.style.height = '100%';
+                bjs.style.width = '100%';
 
-            editor.style.removeProperty("rotate");
-            editor.style.transform = 'translateX(100%)';
-            editor.style.width = '70%';
-            editor.style.height = '100%';
-            editor.style.opacity = '0';
+                editor.style.removeProperty("rotate");
+                editor.style.transform = 'translateX(100%)';
+                editor.style.width = '70%';
+                editor.style.height = '100%';
+                editor.style.opacity = '0';
 
-            setTimeout(function() {
-                editor.style.opacity = '0.9';
-            }, 750);
+                setTimeout(function () {
+                    editor.style.opacity = '0.9';
+                }, 750);
 
-            setTimeout(() => {
-                canvas.zoom("fit-viewport");
-                fitViewport = canvas.zoom();
-                zoom = fitViewport;
-                console.log(fitViewport);
-            }, 100);
+                setTimeout(() => {
+                    canvas.zoom("fit-viewport");
+                    fitViewport = canvas.zoom();
+                    zoom = fitViewport;
+                    console.log(fitViewport);
+                }, 100);
+            }
         }
     })
 });
