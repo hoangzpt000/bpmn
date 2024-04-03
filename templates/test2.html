@@ -4,34 +4,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Speech to Text</title>
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.25.0/tocbot.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.25.0/tocbot.css">
 </head>
 
 <body>
-    <h1>Speech to Text</h1>
-    <button id="start-btn">Start Recording</button>
-    <div id="output"></div>
-
-    <script>
-        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-        const recognition = new SpeechRecognition();
-        const output = document.getElementById('output');
-
-        recognition.lang = 'en-US';
-
-        recognition.onresult = function (event) {
-            const transcript = event.results[0][0].transcript;
-            output.textContent = transcript;
-        }
-
-        recognition.onerror = function (event) {
-            output.textContent = 'Error occurred in recognition: ' + event.error;
-        }
-
-        document.getElementById('start-btn').addEventListener('click', function () {
-            recognition.start();
-        });
-    </script>
+    <h1>Hello</h1>
+    <h2>Hello2</h2>
+    <h1>AAA</h1>
+    <p>ádasdasdasd</p>
 </body>
+
+<script>
+    tocbot.init({
+        // Where to render the table of contents.
+        tocSelector: '.js-toc',
+        // Where to grab the headings to build the table of contents.
+        contentSelector: '.js-toc-content',
+        // Which headings to grab inside of the contentSelector element.
+        headingSelector: 'h1, h2, h3',
+        // For headings inside relative or absolute positioned containers within content.
+        hasInnerContainers: true,
+        headingsOffset: 40,
+        scrollSmoothOffset: -40
+    });
+</script>
 
 </html>

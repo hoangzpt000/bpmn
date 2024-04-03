@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Call API
     async function callAPI(diagramID) {
-        const apiURL = `https://apis.trolyphapluat.ai/detail/${diagramID}`;
+        const apiURL = `https://api.trolyphapluat.ai/detail/${diagramID}`;
 
         try {
 
@@ -178,19 +178,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 zoom += fitViewport / 7;
                 canvas.zoom(zoom);
             }
-            console.log("zoomin: ", zoom);
         })
         zoomout.addEventListener('click', function () {
             if (zoom > fitViewport / 4) {
                 zoom -= fitViewport / 7;
                 canvas.zoom(zoom);
             }
-            console.log("zoomout: ", zoom);
         })
         reset.addEventListener('click', function () {
             canvas.zoom('fit-viewport');
             zoom = fitViewport;
-            console.log("rs: ", zoom);
         })
     }
 
@@ -335,7 +332,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     canvas.zoom("fit-viewport");
                     fitViewport = canvas.zoom();
                     zoom = fitViewport;
-                    console.log(fitViewport);
                 }, 100);
             }
         }
